@@ -4,7 +4,6 @@ import logger from 'fancy-log';
 const app = express();
 
 app.get('/', (req, res) => {
-    logger.info('request made!');
     res.send({hello: 'world'});
 })
 

@@ -1,8 +1,8 @@
 'use strict';
 
 var transformRequest = function transformRequest(config) {
-    var curlString = '';
-    console.log(config);
+    var curlString = 'curl';
+    // console.log(config);
     return curlString;
 };
 

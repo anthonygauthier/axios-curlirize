@@ -1,6 +1,6 @@
 const transformRequest = (config) => {
-    let curlString = '';
-    console.log(config);
+    let curlString = 'curl';
+    // console.log(config);
     return curlString;
 }
 
