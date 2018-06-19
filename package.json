@@ -1,0 +1,34 @@
+{
+  "name": "axios-curlirize",
+  "version": "0.0.1",
+  "description": "Axios third-party module to print all axios requests as curl commands in the console.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/babel  ./src --experimental --source-maps-inline -d ./dist && export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha --exit dist/test/*.test.js",
+    "test-watch": "nodemon --exec 'npm test' --ignore ./dist",
+    "dev": "nodemon --exec \"npm start\" --ignore ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/augmnt/axios-curlirize.git"
+  },
+  "keywords": [
+    "axios",
+    "curl"
+  ],
+  "author": "Augmnt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/augmnt/axios-curlirize/issues"
+  },
+  "homepage": "https://github.com/augmnt/axios-curlirize#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "axios-middleware": "^0.2.0"
+  },
+  "devDependencies": {
+    "expect": "^23.1.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.1.0"
+  }
+}
