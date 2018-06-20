@@ -8,12 +8,24 @@ import {app} from './devapp';
 
 curlirize(axios);
 
-describe('Testing axios-middleware module', () => {
+describe('Testing curlirize', () => {
     it('should return a 200 with the value \'world\'', (done) => {
-        axios.post('http://localhost:7500/', {dummy: 'data'}, {})
+        axios.post('http://localhost:7500/', {dummy: 'data'})
         .then((res) => {
             expect(res.status).toBe(200);
             expect(res.data.hello).toBe('world');
+            done();
+        })
+        .catch((err) => {
+            logger.error(err);
+        });
+    });
+
+    it('should return the response with the defined curl command', (done) => {
+        axios.post('http://localhost:7500/', {dummy: 'data'})
+        .then((res) => {
+            expect(res.config.curlCommand).toBeDefined();
+            expect(res.config.curlCommand).toBe('curl -X POST -H "Content-Type:application/x-www-form-urlencoded" --data {"dummy":"data"} http://localhost:7500/');
             done();
         })
         .catch((err) => {

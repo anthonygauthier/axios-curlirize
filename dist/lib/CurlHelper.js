@@ -23,11 +23,17 @@ var CurlHelper = exports.CurlHelper = function () {
             var headers = this.request.headers;
             var curlHeaders = '';
 
-            for (var property in headers) {
-                curlHeaders = curlHeaders + ' -H "' + property + ':' + headers[property] + '"';
+            //get the headers concerning the appropriate method
+            if (headers.hasOwnProperty('common')) {
+                headers = this.request.headers[this.request.method];
             }
 
-            return curlHeaders;
+            for (var property in headers) {
+                var header = property + ':' + headers[property];
+                curlHeaders = curlHeaders + ' -H "' + header + '"';
+            }
+
+            return curlHeaders.trim();
         }
     }, {
         key: 'getMethod',
@@ -38,17 +44,17 @@ var CurlHelper = exports.CurlHelper = function () {
         key: 'getBody',
         value: function getBody() {
             var data = _typeof(this.request.data) === 'object' || typeof this.request.data === 'array' ? JSON.stringify(this.request.data) : this.request.data;
-            return '--data ' + JSON.stringify(this.request.data);
+            return ('--data ' + data).trim();
         }
     }, {
         key: 'getUrl',
         value: function getUrl() {
-            return this.request.url;
+            return this.request.url.trim();
         }
     }, {
         key: 'generateCommand',
         value: function generateCommand() {
-            return 'curl ' + this.getMethod() + ' ' + this.getHeaders() + ' ' + this.getBody() + ' ' + this.getUrl();
+            return ('curl ' + this.getMethod() + ' ' + this.getHeaders() + ' ' + this.getBody() + ' ' + this.getUrl()).trim();
         }
     }]);
 

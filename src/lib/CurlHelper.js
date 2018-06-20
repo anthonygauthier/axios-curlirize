@@ -4,14 +4,20 @@ export class CurlHelper {
     }
 
     getHeaders() {
-        const headers = this.request.headers;
+        let headers = this.request.headers;
         let curlHeaders = '';
+
+        //get the headers concerning the appropriate method
+        if(headers.hasOwnProperty('common')) {
+            headers = this.request.headers[this.request.method];
+        }
         
         for(let property in headers) {
-            curlHeaders = `${curlHeaders} -H "${property}:${headers[property]}"`
+            let header = `${property}:${headers[property]}`;
+            curlHeaders = `${curlHeaders} -H "${header}"`
         }
 
-        return curlHeaders;
+        return curlHeaders.trim();
     }
 
     getMethod() {
@@ -20,15 +26,15 @@ export class CurlHelper {
 
     getBody() {
         let data = (typeof this.request.data === 'object' || typeof this.request.data === 'array') ? JSON.stringify(this.request.data) : this.request.data;
-        return `--data ${JSON.stringify(this.request.data)}`;
+        return `--data ${data}`.trim();
         
     }
 
     getUrl() {
-        return this.request.url;
+        return this.request.url.trim();
     }
 
     generateCommand() {
-        return `curl ${this.getMethod()} ${this.getHeaders()} ${this.getBody()} ${this.getUrl()}`;
+        return `curl ${this.getMethod()} ${this.getHeaders()} ${this.getBody()} ${this.getUrl()}`.trim();
     }
 }
