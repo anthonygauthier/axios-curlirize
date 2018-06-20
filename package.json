@@ -4,9 +4,7 @@
   "description": "Axios third-party module to print all axios requests as curl commands in the console.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/babel  ./src --experimental --source-maps-inline -d ./dist && export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha --exit dist/test/*.test.js",
-    "test-watch": "nodemon --exec 'npm test' --ignore ./dist",
-    "dev": "nodemon --exec \"npm start\" --ignore ./dist"
+    "test": "./node_modules/.bin/babel  ./src --experimental --source-maps-inline -d ./dist && export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha --exit dist/test/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -14,7 +12,8 @@
   },
   "keywords": [
     "axios",
-    "curl"
+    "curl",
+    "debug"
   ],
   "author": "Augmnt",
   "license": "MIT",
@@ -28,12 +27,12 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "fancy-log": "^1.3.2"
   },
   "devDependencies": {
     "expect": "^23.1.0",
     "express": "^4.16.3",
-    "fancy-log": "^1.3.2",
     "mocha": "^5.2.0"
   }
 }
