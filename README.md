@@ -34,7 +34,7 @@ Then all you have to do is import and instanciate curlirize in your app. Here's 
 
     // starting server
     app.listen(7500, () => {
-        console.log('Dummy server started in ')
+        console.log('Dummy server started on port 7500')
         /*
              The output of this in the console will be :
              curl -X POST  -H "Accept:application/json, text/plain" -H "Content-Type:application/json;charset=utf-8" --data "{\"dummy\":\"data\"}" http://localhost:7500/
