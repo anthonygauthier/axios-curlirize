@@ -11,11 +11,6 @@ curlirize(axios);
 
 describe('Testing axios-middleware module', () => {
     it('should return a 200 with the value \'world\'', (done) => {
-        let headers = {
-            SomeHeader: 'someValue',
-            RandomThing: 'dummyVal'
-        }
-
         axios.post('http://localhost:7500/', {dummy: 'data'}, {})
         .then((res) => {
             expect(res.status).toBe(200);
