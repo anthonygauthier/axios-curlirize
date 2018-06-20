@@ -9,7 +9,7 @@ The module makes use of axios' interceptors to log the request as a cURL command
 # How to use it
 axios-curlirize is super easy to use. First you'll have to install it.
 ```shell
-npm i --save axios-curlirize
+npm i --save axios-curlirize@latest
 ```
 Then all you have to do is import and instanciate curlirize in your app. Here's a sample:
 
