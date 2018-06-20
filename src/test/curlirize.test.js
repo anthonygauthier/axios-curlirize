@@ -52,22 +52,22 @@ describe('Testing curl-helper module', () => {
     const curl = new CurlHelper(fakeConfig);
 
     it('should return a string with headers', (done) => {
-        expect(curl.getHeaders().trim()).toBe('-H "Accept:application/json, text/plain, */*" -H "Content-Type:application/json;charset=utf-8"');
+        expect(curl.getHeaders()).toBe('-H "Accept:application/json, text/plain, */*" -H "Content-Type:application/json;charset=utf-8"');
         done();
     });
 
     it('should return a string with HTTP method', (done) => {
-        expect(curl.getMethod().trim()).toBe('-X POST');
+        expect(curl.getMethod()).toBe('-X POST');
         done();
     });
 
     it('should return a string with request body', (done) => {
-        expect(curl.getBody().trim()).toBe('--data {"dummy":"data"}');
+        expect(curl.getBody()).toBe('--data {"dummy":"data"}');
         done();
     });
 
     it('should return the URL of the request', (done) => {
-        expect(curl.getUrl().trim()).toBe("http://localhost:7500/");
+        expect(curl.getUrl()).toBe("http://localhost:7500/");
         done();
     });
 });
