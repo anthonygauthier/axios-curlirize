@@ -4,18 +4,19 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _axiosMiddleware = require('axios-middleware');
-
 var _CurlHelper = require('./lib/CurlHelper');
 
-exports.default = function (instance) {
-    var service = new _axiosMiddleware.HttpMiddlewareService(instance);
+var _fancyLog = require('fancy-log');
 
-    service.register({
-        onRequest: function onRequest(config) {
-            var curl = new _CurlHelper.CurlHelper(config);
-            console.log(curl.generateCommand());
-            return config;
-        }
+var _fancyLog2 = _interopRequireDefault(_fancyLog);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (instance) {
+    instance.interceptors.request.use(function (req) {
+        var curl = new _CurlHelper.CurlHelper(req);
+        req.curlCommand = curl.generateCommand();
+        _fancyLog2.default.info(req.curlCommand);
+        return req;
     });
 };

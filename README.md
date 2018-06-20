@@ -3,12 +3,8 @@
 # Description
 This module is an axios third-party module to log any axios request as a curl command in the console. It was originally posted as a suggestion on the axios repository, but since we believed it wasn't in the scope of axios to release such feature, we decided to make it as an independent module.
 
-The module makes use of axios and axios-middleware.
-
-**_Supported axios version as of 2018/06/20 : 0.17.1_**
-
 # How it works
-Basically, we use the axios-middleware to log the curl commands on every request. As simple as that.
+The module makes use of axios' interceptors to log the request as a cURL command. It also stores it in the response's config object. Therefore, the command can be seen in the app's console, as well as in the ```res.config.curlCommand``` property of the response.
 
 # How to use it
 axios-curlirize is super easy to use. First you'll have to install it.
@@ -37,7 +33,7 @@ Then all you have to do is import and instanciate curlirize in your app. Here's 
         console.log('Dummy server started on port 7500')
         /*
              The output of this in the console will be :
-             curl -X POST  -H "Accept:application/json, text/plain" -H "Content-Type:application/json;charset=utf-8" --data "{\"dummy\":\"data\"}" http://localhost:7500/
+             curl -X POST -H "Content-Type:application/x-www-form-urlencoded" --data {"dummy":"data"} http://localhost:7500/http://localhost:7500/
         */
         axios.post('http://localhost:7500/', {dummy: 'data'})
             .then((res) => {

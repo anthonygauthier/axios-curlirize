@@ -4,10 +4,6 @@ var _expect = require('expect');
 
 var _expect2 = _interopRequireDefault(_expect);
 
-var _supertest = require('supertest');
-
-var _supertest2 = _interopRequireDefault(_supertest);
-
 var _axios = require('axios');
 
 var _axios2 = _interopRequireDefault(_axios);
@@ -28,16 +24,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _curlirize2.default)(_axios2.default);
 
-describe('Testing axios-middleware module', function () {
+describe('Testing curlirize', function () {
     it('should return a 200 with the value \'world\'', function (done) {
-        var headers = {
-            SomeHeader: 'someValue',
-            RandomThing: 'dummyVal'
-        };
-
-        _axios2.default.post('http://localhost:7500/', { dummy: 'data' }, {}).then(function (res) {
+        _axios2.default.post('http://localhost:7500/', { dummy: 'data' }).then(function (res) {
             (0, _expect2.default)(res.status).toBe(200);
             (0, _expect2.default)(res.data.hello).toBe('world');
+            done();
+        }).catch(function (err) {
+            _fancyLog2.default.error(err);
+        });
+    });
+
+    it('should return the response with the defined curl command', function (done) {
+        _axios2.default.post('http://localhost:7500/', { dummy: 'data' }).then(function (res) {
+            (0, _expect2.default)(res.config.curlCommand).toBeDefined();
+            (0, _expect2.default)(res.config.curlCommand).toBe('curl -X POST -H "Content-Type:application/x-www-form-urlencoded" --data {"dummy":"data"} http://localhost:7500/');
             done();
         }).catch(function (err) {
             _fancyLog2.default.error(err);
