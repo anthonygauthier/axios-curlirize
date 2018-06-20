@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/augmnt/axios-curlirize#readme",
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.18.0",
     "axios-middleware": "^0.2.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",

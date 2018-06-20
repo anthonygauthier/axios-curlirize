@@ -1,12 +1,13 @@
 import { HttpMiddlewareService } from 'axios-middleware';
-import curlHelper from './lib/curl-helper';
+import { CurlHelper } from './lib/CurlHelper';
 
 export default (instance) => {
     const service = new HttpMiddlewareService(instance);
 
     service.register({
         onRequest(config) {
-            curlHelper.transformRequest(config);
+            let curl = new CurlHelper(config);
+            console.log(curl.generateCommand());
             return config;
         }
     })
