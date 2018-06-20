@@ -28,8 +28,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "npm": "^6.1.0"
+    "babel-preset-env": "^1.6.1"
   },
   "devDependencies": {
     "expect": "^23.1.0",

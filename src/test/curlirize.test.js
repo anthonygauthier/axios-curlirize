@@ -1,5 +1,4 @@
 import expect from 'expect';
-import request from 'supertest';
 import axios from 'axios';
 import curlirize from '../curlirize';
 import { CurlHelper } from '../lib/CurlHelper';
