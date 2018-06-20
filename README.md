@@ -33,7 +33,7 @@ Then all you have to do is import and instanciate curlirize in your app. Here's 
         console.log('Dummy server started on port 7500')
         /*
              The output of this in the console will be :
-             curl -X POST -H "Content-Type:application/x-www-form-urlencoded" --data {"dummy":"data"} http://localhost:7500/http://localhost:7500/
+             curl -X POST -H "Content-Type:application/x-www-form-urlencoded" --data {"dummy":"data"} http://localhost:7500/
         */
         axios.post('http://localhost:7500/', {dummy: 'data'})
             .then((res) => {
