@@ -22,6 +22,9 @@
     "url": "https://github.com/augmnt/axios-curlirize/issues"
   },
   "homepage": "https://github.com/augmnt/axios-curlirize#readme",
+  "peerDependencies": {
+    "axios": "^0.18.0"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "axios-middleware": "^0.2.0",
