@@ -16,6 +16,10 @@ app.get('/', function (req, res) {
     res.send({ hello: 'world' });
 });
 
+app.post('/', function (req, res) {
+    res.send({ hello: 'world' });
+});
+
 app.listen(7500, function () {
     _fancyLog2.default.info('Express dev server listening on port 7500');
 });

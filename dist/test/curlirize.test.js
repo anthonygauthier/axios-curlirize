@@ -16,9 +16,7 @@ var _curlirize = require('../curlirize');
 
 var _curlirize2 = _interopRequireDefault(_curlirize);
 
-var _curlHelper = require('../lib/curl-helper');
-
-var _curlHelper2 = _interopRequireDefault(_curlHelper);
+var _CurlHelper = require('../lib/CurlHelper');
 
 var _fancyLog = require('fancy-log');
 
@@ -32,7 +30,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 describe('Testing axios-middleware module', function () {
     it('should return a 200 with the value \'world\'', function (done) {
-        _axios2.default.get('http://localhost:7500/').then(function (res) {
+        var headers = {
+            SomeHeader: 'someValue',
+            RandomThing: 'dummyVal'
+        };
+
+        _axios2.default.post('http://localhost:7500/', { dummy: 'data' }, {}).then(function (res) {
             (0, _expect2.default)(res.status).toBe(200);
             (0, _expect2.default)(res.data.hello).toBe('world');
             done();
@@ -60,29 +63,30 @@ describe('Testing curl-helper module', function () {
         validateStatus: function validateStatus() {
             return 'dummy';
         },
-        headers: { Accept: 'application/json, text/plain, */*' },
-        method: 'get',
+        headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json;charset=utf-8' },
+        method: 'post',
         url: 'http://localhost:7500/',
-        data: undefined
+        data: { dummy: 'data' }
     };
+    var curl = new _CurlHelper.CurlHelper(fakeConfig);
 
     it('should return a string with headers', function (done) {
-
+        (0, _expect2.default)(curl.getHeaders().trim()).toBe('-H "Accept:application/json, text/plain, */*" -H "Content-Type:application/json;charset=utf-8"');
         done();
     });
 
     it('should return a string with HTTP method', function (done) {
-
+        (0, _expect2.default)(curl.getMethod().trim()).toBe('-X POST');
         done();
     });
 
     it('should return a string with request body', function (done) {
-
+        (0, _expect2.default)(curl.getBody().trim()).toBe('--data {"dummy":"data"}');
         done();
     });
 
     it('should return the URL of the request', function (done) {
-
+        (0, _expect2.default)(curl.getUrl().trim()).toBe("http://localhost:7500/");
         done();
     });
 });

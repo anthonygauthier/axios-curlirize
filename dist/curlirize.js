@@ -15,7 +15,6 @@ exports.default = function (instance) {
         onRequest: function onRequest(config) {
             var curl = new _CurlHelper.CurlHelper(config);
             console.log(curl.generateCommand());
-            // curlHelper.transformRequest(config);
             return config;
         }
     });
