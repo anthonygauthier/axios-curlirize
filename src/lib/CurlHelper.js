@@ -4,8 +4,8 @@ export class CurlHelper {
     }
 
     getHeaders() {
-        let headers = this.request.headers;
-        let curlHeaders = '';
+        let headers = this.request.headers,
+            curlHeaders = '';
 
         //get the headers concerning the appropriate method
         if(headers.hasOwnProperty('common')) {
