@@ -4,7 +4,8 @@
   "description": "Axios third-party module to print all axios requests as curl commands in the console.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/babel  ./src --experimental --source-maps-inline -d ./dist && export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha --exit dist/test/*.test.js"
+    "test": "./node_modules/.bin/babel  ./src --experimental --source-maps-inline -d ./dist && export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha --exit dist/test/*.test.js",
+    "postinstall": "./node_modules/.bin/babel  ./src --experimental --source-maps-inline -d ./dist"
   },
   "repository": {
     "type": "git",
