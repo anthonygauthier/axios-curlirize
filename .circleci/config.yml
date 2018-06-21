@@ -28,8 +28,10 @@ jobs:
         - image: circleci/node:7.10
     steps:
       - checkout
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      - run: npm publish
+      - run: npm install
+      - run: npx semantic-release
+      # - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      # - run: npm publish
 
 workflows:
   version: 2
@@ -39,6 +41,8 @@ workflows:
   publish:
     jobs:
       - publish:
+          requires:
+            - build
           filters:
             branches:
               only:
