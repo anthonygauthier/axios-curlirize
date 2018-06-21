@@ -33,7 +33,6 @@
     "axios": "^0.18.0",
     "expect": "^23.1.0",
     "express": "^4.16.3",
-    "mocha": "^5.2.0",
-    "semantic-release": "^15.6.0"
+    "mocha": "^5.2.0"
   }
 }
