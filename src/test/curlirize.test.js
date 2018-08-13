@@ -25,7 +25,7 @@ describe('Testing curlirize', () => {
         axios.post('http://localhost:7500/', {dummy: 'data'})
         .then((res) => {
             expect(res.config.curlCommand).toBeDefined();
-            expect(res.config.curlCommand).toBe('curl -X POST -H "Content-Type:application/x-www-form-urlencoded" --data {"dummy":"data"} http://localhost:7500/');
+            expect(res.config.curlCommand).toBe('curl -X POST -H "Content-Type:application/x-www-form-urlencoded" --data \'{"dummy":"data"}\' http://localhost:7500/');
             done();
         })
         .catch((err) => {
@@ -62,7 +62,7 @@ describe('Testing curl-helper module', () => {
     });
 
     it('should return a string with request body', (done) => {
-        expect(curl.getBody()).toBe('--data {"dummy":"data"}');
+        expect(curl.getBody()).toBe('--data \'{"dummy":"data"}\'');
         done();
     });
 
