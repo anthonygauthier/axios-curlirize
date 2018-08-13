@@ -1,6 +1,6 @@
 {
   "name": "axios-curlirize",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Axios third-party module to print all axios requests as curl commands in the console.",
   "main": "index.js",
   "scripts": {

@@ -23,27 +23,27 @@ jobs:
 
       - run: yarn test
     
-  publish:
-    docker:
-        - image: circleci/node:7.10
-    steps:
-      - checkout
-      - run: npm install
-      - run: npx semantic-release
-      # - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      # - run: npm publish
+  # publish:
+  #   docker:
+  #       - image: circleci/node:7.10
+  #   steps:
+  #     - checkout
+  #     - run: npm install
+  #     - run: npx semantic-release
+  #     - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+  #     - run: npm publish
 
 workflows:
   version: 2
   build-and-test:
     jobs:
       - build
-  publish:
-    jobs:
-      - publish:
-          requires:
-            - build
-          filters:
-            branches:
-              only:
-                - master
+  # publish:
+  #   jobs:
+  #     - publish:
+  #         requires:
+  #           - build
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
