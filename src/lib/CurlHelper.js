@@ -26,8 +26,7 @@ export class CurlHelper {
 
     getBody() {
         let data = (typeof this.request.data === 'object' || typeof this.request.data === 'array') ? JSON.stringify(this.request.data) : this.request.data;
-        return `--data ${data}`.trim();
-        
+        return `--data '${data}'`.trim();
     }
 
     getUrl() {
