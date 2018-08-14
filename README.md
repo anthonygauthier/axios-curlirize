@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/augmnt/axios-curlirize/tree/master.svg?style=svg)](https://circleci.com/gh/augmnt/axios-curlirize/tree/master)
+[![CircleCI](https://circleci.com/gh/delirius325/axios-curlirize.svg?style=svg)](https://circleci.com/gh/delirius325/axios-curlirize)
 
 # Description
 This module is an axios third-party module to log any axios request as a curl command in the console. It was originally posted as a suggestion on the axios repository, but since we believed it wasn't in the scope of axios to release such feature, we decided to make it as an independent module.
