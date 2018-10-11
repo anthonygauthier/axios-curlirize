@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7d519058c2f340428a1b7ef22d71368f)](https://app.codacy.com/app/antho325/axios-curlirize?utm_source=github.com&utm_medium=referral&utm_content=delirius325/axios-curlirize&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/delirius325/axios-curlirize.svg?style=svg)](https://circleci.com/gh/delirius325/axios-curlirize)
 
 # Description
