@@ -1,6 +1,9 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7d519058c2f340428a1b7ef22d71368f)](https://app.codacy.com/app/antho325/axios-curlirize?utm_source=github.com&utm_medium=referral&utm_content=delirius325/axios-curlirize&utm_campaign=Badge_Grade_Dashboard)
 [![CircleCI](https://circleci.com/gh/delirius325/axios-curlirize.svg?style=svg)](https://circleci.com/gh/delirius325/axios-curlirize)
 
+### Support the author
+[![patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/bePatron?u=17797269)
+
 # Description
 This module is an axios third-party module to log any axios request as a curl command in the console. It was originally posted as a suggestion on the axios repository, but since we believed it wasn't in the scope of axios to release such feature, we decided to make it as an independent module.
 
