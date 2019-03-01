@@ -7,9 +7,16 @@ export class CurlHelper {
     let headers = this.request.headers,
       curlHeaders = '';
 
-    //get the headers concerning the appropriate method
+    // get the headers concerning the appropriate method (defined in the global axios instance)
     if (headers.hasOwnProperty('common')) {
       headers = this.request.headers[this.request.method];
+    }
+
+    // add any custom headers (defined upon calling methods like .get(), .post(), etc.) 
+    for(let property in this.request.headers) {
+      if(!['common', 'delete', 'get', 'head', 'patch', 'post', 'put'].includes(property)) {
+        headers[property] = this.request.headers[property];
+      }
     }
 
     for (let property in headers) {
@@ -25,8 +32,12 @@ export class CurlHelper {
   }
 
   getBody() {
-    let data = (typeof this.request.data === 'object' || typeof this.request.data === 'array') ? JSON.stringify(this.request.data) : this.request.data;
-    return `--data '${data}'`.trim();
+    if((typeof this.request.data !== 'undefined') && this.request.data !== '' && Object.keys(this.request.data).length && this.request.method.toUpperCase() !== 'GET') {
+      let data = (typeof this.request.data === 'object' || typeof this.request.data === 'array') ? JSON.stringify(this.request.data) : this.request.data;
+      return `--data '${data}'`.trim();
+    } else {
+      return '';
+    }
   }
 
   getUrl() {
@@ -34,6 +45,6 @@ export class CurlHelper {
   }
 
   generateCommand() {
-    return `curl ${this.getMethod()} ${this.getHeaders()} ${this.getBody()} ${this.getUrl()}`.trim();
+    return `curl ${this.getMethod()} ${this.getHeaders()} ${this.getBody()} ${this.getUrl()}`.trim().replace(/\s{2,}/g, ' ');
   }
 }

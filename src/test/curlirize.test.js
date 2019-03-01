@@ -44,6 +44,30 @@ describe('Testing curlirize', () => {
         logger.error(err);
       });
   });
+
+  it('should return the generated command with no --data attribute', done => {
+    axios.post('http://localhost:7500/')
+      .then(res => {
+        expect(res.config.curlCommand).toBeDefined();
+        expect(res.config.curlCommand).toBe('curl -X POST -H "Content-Type:application/x-www-form-urlencoded" http://localhost:7500/');
+        done();
+      })
+      .catch(err => {
+        logger.error(err);
+      });
+  });
+
+  it('should return the generated command with headers specified on method call', done => {
+    axios.post('http://localhost:7500/', {}, {headers: {Authorization: 'Bearer 123', testHeader: 'Testing'}})
+      .then(res => {
+        expect(res.config.curlCommand).toBeDefined();
+        expect(res.config.curlCommand).toBe('curl -X POST -H \"Content-Type:application/x-www-form-urlencoded\" -H \"Authorization:Bearer 123\" -H \"testHeader:Testing\" http://localhost:7500/');
+        done();
+      })
+      .catch(err => {
+        logger.error(err);
+      });
+  });
 });
 
 describe('Testing curl-helper module', () => {
@@ -62,6 +86,66 @@ describe('Testing curl-helper module', () => {
     data: { dummy: 'data' }
   }
   const curl = new CurlHelper(fakeConfig);
+
+  it('should return an empty string if data is undefined', done => {
+    let emptyConfig = {
+      adapter: () => { return 'dummy' },
+      transformRequest: { '0': () => { return 'dummy' } },
+      transformResponse: { '0': () => { return 'dummy' } },
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      validateStatus: () => { return 'dummy' },
+      headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json;charset=utf-8' },
+      method: 'post',
+      url: 'http://localhost:7500/',
+      data: undefined
+    };
+    const emptyDataCurl = new CurlHelper(emptyConfig);
+    expect(emptyDataCurl.getBody()).toBe('');
+    done();
+  });
+
+  it('should return an empty string if data is == empty string', done => {
+    let emptyConfig = {
+      adapter: () => { return 'dummy' },
+      transformRequest: { '0': () => { return 'dummy' } },
+      transformResponse: { '0': () => { return 'dummy' } },
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      validateStatus: () => { return 'dummy' },
+      headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json;charset=utf-8' },
+      method: 'post',
+      url: 'http://localhost:7500/',
+      data: ''
+    };
+    const emptyDataCurl = new CurlHelper(emptyConfig);
+    expect(emptyDataCurl.getBody()).toBe('');
+    done();
+  });
+
+  it('should return an empty string if data is == {}', done => {
+    let emptyConfig = {
+      adapter: () => { return 'dummy' },
+      transformRequest: { '0': () => { return 'dummy' } },
+      transformResponse: { '0': () => { return 'dummy' } },
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      validateStatus: () => { return 'dummy' },
+      headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json;charset=utf-8' },
+      method: 'post',
+      url: 'http://localhost:7500/',
+      data: {}
+    };
+    const emptyDataCurl = new CurlHelper(emptyConfig);
+    expect(emptyDataCurl.getBody()).toBe('');
+    done();
+  });
 
   it('should return a string with headers', done => {
     expect(curl.getHeaders()).toBe('-H "Accept:application/json, text/plain, */*" -H "Content-Type:application/json;charset=utf-8"');
