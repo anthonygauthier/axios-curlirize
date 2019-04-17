@@ -1,12 +1,16 @@
 import { CurlHelper } from './lib/CurlHelper';
 import logger from 'fancy-log';
 
-export default (instance) => {
-  instance.interceptors.request.use(req => {
+function defaultLogFunc(curlCommand) {
+  logger.info(curlCommand);
+}
+
+export default (instance, logFunc = defaultLogFunc) => {
+  instance.interceptors.request.use((req) => {
     const curl = new CurlHelper(req);
     req.curlObject = curl;
     req.curlCommand = curl.generateCommand();
-    logger.info(req.curlCommand);
+    logFunc(req.curlCommand);
     return req;
   });
-}
+};
