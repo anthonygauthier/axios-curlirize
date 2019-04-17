@@ -1,3 +1,5 @@
+import { BodyHelper } from './BodyHelper';
+
 export class CurlHelper {
   constructor(config) {
     this.request = config;
@@ -17,16 +19,16 @@ export class CurlHelper {
       headers = this.request.headers[this.request.method];
     }
 
-    // add any custom headers (defined upon calling methods like .get(), .post(), etc.) 
-    for(let property in this.request.headers) {
-      if(!['common', 'delete', 'get', 'head', 'patch', 'post', 'put'].includes(property)) {
+    // add any custom headers (defined upon calling methods like .get(), .post(), etc.)
+    for (let property in this.request.headers) {
+      if (!['common', 'delete', 'get', 'head', 'patch', 'post', 'put'].includes(property)) {
         headers[property] = this.request.headers[property];
       }
     }
 
     for (let property in headers) {
       let header = `${property}:${headers[property]}`;
-      curlHeaders = `${curlHeaders} -H "${header}"`
+      curlHeaders = `${curlHeaders} -H "${header}"`;
     }
 
     return curlHeaders.trim();
@@ -37,12 +39,12 @@ export class CurlHelper {
   }
 
   getBody() {
-    if((typeof this.request.data !== 'undefined') && this.request.data !== '' && Object.keys(this.request.data).length && this.request.method.toUpperCase() !== 'GET') {
-      let data = (typeof this.request.data === 'object' || typeof this.request.data === 'array') ? JSON.stringify(this.request.data) : this.request.data;
-      return `--data '${data}'`.trim();
-    } else {
+    // GET and DELETE have no body.
+    if (['GET', 'DELETE'].indexOf(this.request.method.toUpperCase()) >= 0) {
       return '';
     }
+    let bodyHelper = new BodyHelper(this.request.headers, this.request.data);
+    return bodyHelper.toString();
   }
 
   getUrl() {
@@ -50,6 +52,8 @@ export class CurlHelper {
   }
 
   generateCommand() {
-    return `curl ${this.getMethod()} ${this.getHeaders()} ${this.getBody()} ${this.getUrl()}`.trim().replace(/\s{2,}/g, ' ');
+    return `curl ${this.getMethod()} ${this.getHeaders()} ${this.getBody()} ${this.getUrl()}`
+      .trim()
+      .replace(/\s{2,}/g, ' ');
   }
 }
