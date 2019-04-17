@@ -7,6 +7,11 @@ export class CurlHelper {
     let headers = this.request.headers,
       curlHeaders = '';
 
+    // If the header is empty, defend it.
+    if (headers === undefined || headers === null) {
+      return curlHeaders;
+    }
+
     // get the headers concerning the appropriate method (defined in the global axios instance)
     if (headers.hasOwnProperty('common')) {
       headers = this.request.headers[this.request.method];
