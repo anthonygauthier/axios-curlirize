@@ -1,16 +1,17 @@
 import { CurlHelper } from './lib/CurlHelper';
 import logger from 'fancy-log';
 
-function defaultLogFunc(curlCommand, err) {
+function defaultLogCallback(curlResult, err) {
+  const { command } = curlResult;
   if (curlCommand) {
-    logger.info(curlCommand);
+    logger.info(command);
   }
   if (err) {
     logger.error(err);
   }
 }
 
-export default (instance, logFunc = defaultLogFunc) => {
+export default (instance, callback = defaultLogCallback) => {
   instance.interceptors.request.use((req) => {
     try {
       const curl = new CurlHelper(req);
@@ -18,9 +19,12 @@ export default (instance, logFunc = defaultLogFunc) => {
       req.curlCommand = curl.generateCommand();
     } catch (err) {
       // Even if the axios middleware is stopped, no error should occur outside.
-      logFunc(null, err);
+      callback(null, err);
     } finally {
-      logFunc(req.curlCommand);
+      callback({
+        command: req.curlCommand,
+        object: req.curlObject,
+      });
       return req;
     }
   });
