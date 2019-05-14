@@ -33,7 +33,7 @@ export class CurlHelper {
 
   getBody() {
     if((typeof this.request.data !== 'undefined') && this.request.data !== '' && Object.keys(this.request.data).length && this.request.method.toUpperCase() !== 'GET') {
-      let data = (typeof this.request.data === 'object' || typeof this.request.data === 'array') ? JSON.stringify(this.request.data) : this.request.data;
+      let data = (typeof this.request.data === 'object' ||  Object.prototype.toString.call(this.request.data) === '[object Array]') ? JSON.stringify(this.request.data) : this.request.data;
       return `--data '${data}'`.trim();
     } else {
       return '';
