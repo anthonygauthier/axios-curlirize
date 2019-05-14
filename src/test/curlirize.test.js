@@ -2,7 +2,6 @@ import expect from 'expect';
 import axios from 'axios';
 import curlirize from '../curlirize';
 import { CurlHelper } from '../lib/CurlHelper';
-import logger from 'fancy-log';
 
 import { app } from './devapp';
 
@@ -17,7 +16,7 @@ describe('Testing curlirize', () => {
         done();
       })
       .catch(err => {
-        logger.error(err);
+        console.error(err);
       });
   });
 
@@ -29,7 +28,7 @@ describe('Testing curlirize', () => {
         done();
       })
       .catch(err => {
-        logger.error(err);
+        console.error(err);
       });
   });
 
@@ -41,7 +40,7 @@ describe('Testing curlirize', () => {
         done();
       })
       .catch(err => {
-        logger.error(err);
+        console.error(err);
       });
   });
 
@@ -53,7 +52,7 @@ describe('Testing curlirize', () => {
         done();
       })
       .catch(err => {
-        logger.error(err);
+        console.error(err);
       });
   });
 
@@ -65,7 +64,7 @@ describe('Testing curlirize', () => {
         done();
       })
       .catch(err => {
-        logger.error(err);
+        console.error(err);
       });
   });
 });
