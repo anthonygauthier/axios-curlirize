@@ -17,6 +17,14 @@
     "debug"
   ],
   "author": "delirius325",
+  "contributors": [{ 
+      "name" : "Justin \"jayceekay\"", 
+      "url" : "https://github.com/jayceekay"
+    }, {
+      "name": "Peter \"binggg\" Zhao",
+      "url": "https://github.com/binggg"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/delirius325/axios-curlirize/issues"
