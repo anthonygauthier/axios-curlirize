@@ -17,6 +17,14 @@
     "debug"
   ],
   "author": "delirius325",
+  "contributors": [{ 
+      "name" : "Justin \"jayceekay\"", 
+      "url" : "https://github.com/jayceekay"
+    }, {
+      "name": "Peter \"binggg\" Zhao",
+      "url": "https://github.com/binggg"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/delirius325/axios-curlirize/issues"
@@ -29,7 +37,7 @@
     "babel-preset-env": "^1.6.1"
   },
   "devDependencies": {
-    "axios": "^0.18.0",
+    "axios": ">=0.19.0",
     "expect": "^23.1.0",
     "express": "^4.16.3",
     "mocha": "^5.2.0"

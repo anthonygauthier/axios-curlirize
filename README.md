@@ -8,6 +8,21 @@ This module is an axios third-party module to log any axios request as a curl co
 # How it works
 The module makes use of axios' interceptors to log the request as a cURL command. It also stores it in the response's config object. Therefore, the command can be seen in the app's console, as well as in the ```res.config.curlCommand``` property of the response.
 
+# Changing the logger
+By default, axios-curlirize uses the `console.log/error()` functions. It is possible to change the logger by doing something similar to this:
+
+```javascript
+// when initiating your curlirize instance
+curlirize(axios, (result, err) => {
+    const { command } = result;
+    if(err) {
+        // use your logger here
+    } else {
+        // use your logger here
+    }
+});
+```
+
 # How to use it
 axios-curlirize is super easy to use. First you'll have to install it.
 ```shell
