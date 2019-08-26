@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/babel ./src --experimental --source-maps-inline -d ./dist && export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha --exit dist/test/*.test.js",
-    "postinstall": "if [ ! -e ./node_modules/.bin/babel ]; then ./node_modules/.bin/babel ./src --experimental --source-maps-inline -d ./dist; fi"
+    "postinstall": "if [ -e ./node_modules/.bin/babel ]; then ./node_modules/.bin/babel ./src --experimental --source-maps-inline -d ./dist; fi"
   },
   "repository": {
     "type": "git",
