@@ -45,6 +45,6 @@ export class CurlHelper {
   }
 
   generateCommand() {
-    return `curl ${this.getMethod()} ${this.getHeaders()} ${this.getBody()} ${this.getUrl()}`.trim().replace(/\s{2,}/g, ' ');
+    return `curl ${this.getMethod()} ${this.getHeaders()} ${this.getBody()} "${this.getUrl()}"`.trim().replace(/\s{2,}/g, ' ');
   }
 }
