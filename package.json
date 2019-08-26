@@ -17,10 +17,12 @@
     "debug"
   ],
   "author": "delirius325",
-  "contributors": [{ 
-      "name" : "Justin \"jayceekay\"", 
-      "url" : "https://github.com/jayceekay"
-    }, {
+  "contributors": [
+    {
+      "name": "Justin \"jayceekay\"",
+      "url": "https://github.com/jayceekay"
+    },
+    {
       "name": "Peter \"binggg\" Zhao",
       "url": "https://github.com/binggg"
     }
@@ -30,8 +32,7 @@
     "url": "https://github.com/delirius325/axios-curlirize/issues"
   },
   "homepage": "https://github.com/delirius325/axios-curlirize#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "axios": ">=0.19.0",
     "expect": "^23.1.0",

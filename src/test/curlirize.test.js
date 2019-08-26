@@ -67,6 +67,18 @@ describe('Testing curlirize', () => {
         console.error(err);
       });
   });
+
+  it('should return the generated command with a queryString specified in the URL', done => {
+    axios.post('http://localhost:7500/', {}, {params: {test: 1}})
+      .then(res => {
+        expect(res.config.curlCommand).toBeDefined();
+        expect(res.config.curlCommand).toBe('curl -X POST -H \"Content-Type:application/x-www-form-urlencoded\" "http://localhost:7500?test=1"');
+        done();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  });
 });
 
 describe('Testing curl-helper module', () => {
@@ -82,7 +94,8 @@ describe('Testing curl-helper module', () => {
     headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json;charset=utf-8' },
     method: 'post',
     url: 'http://localhost:7500/',
-    data: { dummy: 'data' }
+    data: { dummy: 'data' },
+    params: { testParam: 'test1', testParam_two: "test2"} 
   }
   const curl = new CurlHelper(fakeConfig);
 
@@ -163,6 +176,11 @@ describe('Testing curl-helper module', () => {
 
   it('should return the URL of the request', done => {
     expect(curl.getUrl()).toBe("http://localhost:7500/");
+    done();
+  });
+
+  it('should return the queryString of the request', done => {
+    expect(curl.getQueryString()).toBe("?testParam=test1&testParam_two=test2");
     done();
   });
 });
