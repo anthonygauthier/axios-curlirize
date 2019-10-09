@@ -1,1 +1,1 @@
-module.exports = require('./src/curlirize');
+module.exports = require('./dist/curlirize');
