@@ -1,7 +1,7 @@
 {
-  "name": "curlirize-for-axios",
-  "version": "1.4.0",
-  "description": "Axios third-party module to print all axios requests as curl commands in the console.",
+  "name": "axios-to-curl",
+  "version": "1.3.4",
+  "description": "Axios third-party module to print all axios requests as curl commands in the console. This repository is forked from axios-curlirize <https://www.npmjs.com/package/axios-curlirize> and supports use with Node JS without having to enable ES6 imports. This repo was inspired by an issue <https://github.com/delirius325/axios-curlirize/issues/20> raised on the origional repository <https://github.com/delirius325/axios-curlirize>. Special thanks to Anthony Gauthier <https://github.com/delirius325>, the author of axios-curlirize",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/babel ./src --experimental --source-maps-inline -d ./dist && export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha --exit dist/test/*.test.js",
@@ -16,15 +16,11 @@
     "curl",
     "debug"
   ],
-  "author": "delirius325",
+  "author": "Abhishek Rajeshirke <https://github.com/colidarity>",
   "contributors": [
     {
-      "name": "Justin \"jayceekay\"",
-      "url": "https://github.com/jayceekay"
-    },
-    {
-      "name": "Peter \"binggg\" Zhao",
-      "url": "https://github.com/binggg"
+      "name": "Abhishek Rajeshirke",
+      "url": "https://github.com/colidarity"
     }
   ],
   "license": "MIT",
