@@ -11,7 +11,7 @@ Axios third-party module to print all axios requests as curl commands in the con
 
 Special thanks to Anthony Gauthier <https://github.com/delirius325>, the author of axios-curlirize.
 
-The package name hereafter will be referred to as axios-curlirize as I have contributed very little, for me change its name.
+> The package name hereafter will be referred to as axios-curlirize.
 
 # How it works
 
