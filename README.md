@@ -6,13 +6,6 @@
 
 This module is an axios third-party module to log any axios request as a curl command in the console. It was originally posted as a suggestion on the axios repository, but since we believed it wasn't in the scope of axios to release such feature, we decided to make it as an independent module.
 
-#Post Note:
-Axios third-party module to print all axios requests as curl commands in the console. This repository is forked from axios-curlirize <https://www.npmjs.com/package/axios-curlirize> and supports use with Node JS without having to enable ES6 imports. This repo was inspired by an issue <https://github.com/delirius325/axios-curlirize/issues/20> raised on the origional repository <https://github.com/delirius325/axios-curlirize>.
-
-Special thanks to Anthony Gauthier <https://github.com/delirius325>, the author of axios-curlirize.
-
-The package name hereafter will be referred to as axios-curlirize as I have contributed very little, for me change its name.
-
 # How it works
 
 The module makes use of axios' interceptors to log the request as a cURL command. It also stores it in the response's config object. Therefore, the command can be seen in the app's console, as well as in the `res.config.curlCommand` property of the response.
