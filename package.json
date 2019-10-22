@@ -36,10 +36,9 @@
     "url": "https://github.com/delirius325/axios-curlirize/issues"
   },
   "homepage": "https://github.com/delirius325/axios-curlirize#readme",
-  "dependencies": {
-    "axios": ">=0.19.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "axios": ">=0.19.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-polyfill": "^6.26.0",
