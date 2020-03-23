@@ -68,3 +68,20 @@ app.listen(7500, () => {
     });
 });
 ```
+
+# Disable the logger
+
+By default, all requests will be logged. But you can disable this behaviour unitarily by setting the `curlirize` option to false within the axios request.
+
+```javascript
+axios
+  .post('http://localhost:7500/', { dummy: 'data' }, {
+    curlirize: false
+  })
+  .then(res => {
+    console.log('success');
+  })
+  .catch(err => {
+    console.log(err);
+  });
+```
