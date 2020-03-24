@@ -20,10 +20,12 @@ export default (instance, callback = defaultLogCallback) => {
       // Even if the axios middleware is stopped, no error should occur outside.
       callback(null, err);
     } finally {
-      callback({
-        command: req.curlCommand,
-        object: req.curlObject,
-      });
+      if (req.curlirize !== false) {
+        callback({
+          command: req.curlCommand,
+          object: req.curlObject
+        });
+      }
       return req;
     }
   });
