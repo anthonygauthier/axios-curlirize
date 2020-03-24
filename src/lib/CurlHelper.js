@@ -54,6 +54,9 @@ export class CurlHelper {
   }
 
   getUrl() {
+    if (this.request.baseURL) {
+      return this.request.baseURL + "/" + this.request.url;
+    }
     return this.request.url
   }
 
