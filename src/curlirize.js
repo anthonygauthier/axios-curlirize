@@ -1,6 +1,5 @@
 import { CurlHelper } from './lib/CurlHelper';
 
-// thanks to https://github.com/uyu423
 function defaultLogCallback(curlResult, err) {
   const { command } = curlResult;
   if (err) {
