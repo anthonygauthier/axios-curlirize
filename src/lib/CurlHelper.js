@@ -65,11 +65,9 @@ export class CurlHelper {
       i = 0;
 
     for (let param in this.request.params) {
-      if (i != 0) {
-        params += `&${param}=${this.request.params[param]}`;
-      } else {
-        params = `?${param}=${this.request.params[param]}`;
-      }
+      params += (i != 0)
+       ? `&${param}=${this.request.params[param]}`
+       : `?${param}=${this.request.params[param]}`
       i++;
     }
 
