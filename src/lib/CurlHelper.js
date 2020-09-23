@@ -39,7 +39,8 @@ export class CurlHelper {
     if (
       typeof this.request.data !== "undefined" &&
       this.request.data !== "" &&
-      Object.keys(this.request.data).length &&
+      this.request.data !== null &&
+      //Object.keys(this.request.data).length &&
       this.request.method.toUpperCase() !== "GET"
     ) {
       let data =
@@ -57,7 +58,7 @@ export class CurlHelper {
     if (this.request.baseURL) {
       return this.request.baseURL + "/" + this.request.url;
     }
-    return this.request.url
+    return this.request.url;
   }
 
   getQueryString() {
@@ -65,9 +66,10 @@ export class CurlHelper {
       i = 0;
 
     for (let param in this.request.params) {
-      params += (i != 0)
-       ? `&${param}=${this.request.params[param]}`
-       : `?${param}=${this.request.params[param]}`
+      params +=
+        i != 0
+          ? `&${param}=${this.request.params[param]}`
+          : `?${param}=${this.request.params[param]}`;
       i++;
     }
 
@@ -78,7 +80,8 @@ export class CurlHelper {
     let url = this.getUrl();
 
     if (this.getQueryString() != "") {
-      url = (url.charAt(url.length - 1) == '/')  ? url.substr(0, url.length - 1) : url; 
+      url =
+        url.charAt(url.length - 1) == "/" ? url.substr(0, url.length - 1) : url;
       url += this.getQueryString();
     }
 

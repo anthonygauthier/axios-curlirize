@@ -57,7 +57,7 @@ describe('Testing curlirize', () => {
   });
 
   it('should return the generated command with headers specified on method call', done => {
-    axios.post('http://localhost:7500/', {}, {headers: {Authorization: 'Bearer 123', testHeader: 'Testing'}})
+    axios.post('http://localhost:7500/', null, {headers: {Authorization: 'Bearer 123', testHeader: 'Testing'}})
       .then(res => {
         expect(res.config.curlCommand).toBeDefined();
         expect(res.config.curlCommand).toBe('curl -X POST -H \"Content-Type:application/x-www-form-urlencoded\" -H \"Authorization:Bearer 123\" -H \"testHeader:Testing\" "http://localhost:7500/"');
@@ -69,7 +69,7 @@ describe('Testing curlirize', () => {
   });
 
   it('should return the generated command with a queryString specified in the URL', done => {
-    axios.post('http://localhost:7500/', {}, {params: {test: 1}})
+    axios.post('http://localhost:7500/', null, {params: {test: 1}})
       .then(res => {
         expect(res.config.curlCommand).toBeDefined();
         expect(res.config.curlCommand).toBe('curl -X POST -H \"Content-Type:application/x-www-form-urlencoded\" "http://localhost:7500?test=1"');
@@ -139,7 +139,7 @@ describe('Testing curl-helper module', () => {
     done();
   });
 
-  it('should return an empty string if data is == {}', done => {
+  it('should return {} as --data if req data is == {}', done => {
     let emptyConfig = {
       adapter: () => { return 'dummy' },
       transformRequest: { '0': () => { return 'dummy' } },
@@ -155,7 +155,7 @@ describe('Testing curl-helper module', () => {
       data: {}
     };
     const emptyDataCurl = new CurlHelper(emptyConfig);
-    expect(emptyDataCurl.getBody()).toBe('');
+    expect(emptyDataCurl.getBody()).toBe("--data '{}'");
     done();
   });
 
