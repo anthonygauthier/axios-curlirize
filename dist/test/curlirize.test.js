@@ -62,7 +62,7 @@ describe('Testing curlirize', function () {
   });
 
   it('should return the generated command with headers specified on method call', function (done) {
-    _axios2.default.post('http://localhost:7500/', {}, { headers: { Authorization: 'Bearer 123', testHeader: 'Testing' } }).then(function (res) {
+    _axios2.default.post('http://localhost:7500/', null, { headers: { Authorization: 'Bearer 123', testHeader: 'Testing' } }).then(function (res) {
       (0, _expect2.default)(res.config.curlCommand).toBeDefined();
       (0, _expect2.default)(res.config.curlCommand).toBe('curl -X POST -H \"Content-Type:application/x-www-form-urlencoded\" -H \"Authorization:Bearer 123\" -H \"testHeader:Testing\" "http://localhost:7500/"');
       done();
@@ -72,7 +72,7 @@ describe('Testing curlirize', function () {
   });
 
   it('should return the generated command with a queryString specified in the URL', function (done) {
-    _axios2.default.post('http://localhost:7500/', {}, { params: { test: 1 } }).then(function (res) {
+    _axios2.default.post('http://localhost:7500/', null, { params: { test: 1 } }).then(function (res) {
       (0, _expect2.default)(res.config.curlCommand).toBeDefined();
       (0, _expect2.default)(res.config.curlCommand).toBe('curl -X POST -H \"Content-Type:application/x-www-form-urlencoded\" "http://localhost:7500?test=1"');
       done();
@@ -164,7 +164,7 @@ describe('Testing curl-helper module', function () {
     done();
   });
 
-  it('should return an empty string if data is == {}', function (done) {
+  it('should return {} as --data if req data is == {}', function (done) {
     var emptyConfig = {
       adapter: function adapter() {
         return 'dummy';
@@ -188,7 +188,7 @@ describe('Testing curl-helper module', function () {
       data: {}
     };
     var emptyDataCurl = new _CurlHelper.CurlHelper(emptyConfig);
-    (0, _expect2.default)(emptyDataCurl.getBody()).toBe('');
+    (0, _expect2.default)(emptyDataCurl.getBody()).toBe("--data '{}'");
     done();
   });
 

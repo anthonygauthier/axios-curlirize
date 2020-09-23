@@ -50,7 +50,9 @@ var CurlHelper = exports.CurlHelper = function () {
   }, {
     key: "getBody",
     value: function getBody() {
-      if (typeof this.request.data !== "undefined" && this.request.data !== "" && Object.keys(this.request.data).length && this.request.method.toUpperCase() !== "GET") {
+      if (typeof this.request.data !== "undefined" && this.request.data !== "" && this.request.data !== null &&
+      //Object.keys(this.request.data).length &&
+      this.request.method.toUpperCase() !== "GET") {
         var data = _typeof(this.request.data) === "object" || Object.prototype.toString.call(this.request.data) === "[object Array]" ? JSON.stringify(this.request.data) : this.request.data;
         return ("--data '" + data + "'").trim();
       } else {
@@ -60,6 +62,9 @@ var CurlHelper = exports.CurlHelper = function () {
   }, {
     key: "getUrl",
     value: function getUrl() {
+      if (this.request.baseURL) {
+        return this.request.baseURL + "/" + this.request.url;
+      }
       return this.request.url;
     }
   }, {
@@ -69,11 +74,7 @@ var CurlHelper = exports.CurlHelper = function () {
           i = 0;
 
       for (var param in this.request.params) {
-        if (i != 0) {
-          params += "&" + param + "=" + this.request.params[param];
-        } else {
-          params = "?" + param + "=" + this.request.params[param];
-        }
+        params += i != 0 ? "&" + param + "=" + this.request.params[param] : "?" + param + "=" + this.request.params[param];
         i++;
       }
 
@@ -85,7 +86,7 @@ var CurlHelper = exports.CurlHelper = function () {
       var url = this.getUrl();
 
       if (this.getQueryString() != "") {
-        url = url.charAt(url.length - 1) == '/' ? url.substr(0, url.length - 1) : url;
+        url = url.charAt(url.length - 1) == "/" ? url.substr(0, url.length - 1) : url;
         url += this.getQueryString();
       }
 
