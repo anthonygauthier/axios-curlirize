@@ -79,8 +79,7 @@ export class CurlHelper {
     let url = this.getUrl();
 
     if (this.getQueryString() != "") {
-      url =
-        url.charAt(url.length - 1) == "/" ? url.substr(0, url.length - 1) : url;
+      url = url.charAt(url.length - 1) == "/" ? url.substr(0, url.length - 1) : url;
       url += this.getQueryString();
     }
 
