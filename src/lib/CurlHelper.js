@@ -40,7 +40,6 @@ export class CurlHelper {
       typeof this.request.data !== "undefined" &&
       this.request.data !== "" &&
       this.request.data !== null &&
-      //Object.keys(this.request.data).length &&
       this.request.method.toUpperCase() !== "GET"
     ) {
       let data =
