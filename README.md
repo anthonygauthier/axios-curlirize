@@ -69,6 +69,13 @@ app.listen(7500, () => {
 });
 ```
 
+## Curilirize additional axios instance
+To curlirize any other instances of axios (aside from the base one), please call the `curlirize()` method on that instance.
+```javascript
+const instance = axios.create({ baseURL: 'https://some-domain.com/api/', timeout: 1000, headers: {'X-Custom-Header': 'foobar'} });
+curlirize(instance);
+```
+
 # Disable the logger
 
 By default, all requests will be logged. But you can disable this behaviour unitarily by setting the `curlirize` option to false within the axios request.
