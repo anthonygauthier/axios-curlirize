@@ -97,9 +97,7 @@ axios
 
 ```javascript
 axios
-  .post('http://localhost:7500/', { dummy: 'data' }, {
-    curlirize: false
-  })
+  .post('http://localhost:7500/', { dummy: 'data' })
   .then(res => {
     res.config.clearCurl();
   })
