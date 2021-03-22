@@ -30,6 +30,19 @@ describe('Testing curlirize', function () {
       console.error(err);
     });
   });
+  it('should allow to remove curlirize part on a request', function (done) {
+    _axios2.default.post('http://localhost:7500/', { dummy: 'data' }).then(function (res) {
+      (0, _expect2.default)(res.status).toBe(200);
+      (0, _expect2.default)(res.data.hello).toBe('world');
+      res.config.clearCurl();
+      (0, _expect2.default)(res.config.curlObject).not.toBeDefined();
+      (0, _expect2.default)(res.config.curlCommand).not.toBeDefined();
+      (0, _expect2.default)(res.config.clearCurl).not.toBeDefined();
+      done();
+    }).catch(function (err) {
+      console.error(err);
+    });
+  });
 
   it('should return a generated command with XML as data', function (done) {
     _axios2.default.post('http://localhost:7500', "<myTestTag></myTestTag>").then(function (res) {

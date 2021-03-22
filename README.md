@@ -92,3 +92,16 @@ axios
     console.log(err);
   });
 ```
+
+# Clear a request
+
+```javascript
+axios
+  .post('http://localhost:7500/', { dummy: 'data' })
+  .then(res => {
+    res.config.clearCurl();
+  })
+  .catch(err => {
+    console.log(err);
+  });
+```

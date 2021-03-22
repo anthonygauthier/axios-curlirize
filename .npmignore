@@ -1,0 +1,8 @@
+src/test
+dist/test
+.circleci
+.github
+codecov.yml
+.releaserc
+.idea
+*.tgz
