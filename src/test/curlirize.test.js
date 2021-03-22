@@ -10,14 +10,29 @@ curlirize(axios);
 describe('Testing curlirize', () => {
   it('should return a 200 with the value \'world\'', done => {
     axios.post('http://localhost:7500/', { dummy: 'data' })
-      .then(res => {
-        expect(res.status).toBe(200);
-        expect(res.data.hello).toBe('world');
-        done();
-      })
-      .catch(err => {
-        console.error(err);
-      });
+        .then(res => {
+          expect(res.status).toBe(200);
+          expect(res.data.hello).toBe('world');
+          done();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+  });
+  it('should allow to remove curlirize part on a request', done => {
+    axios.post('http://localhost:7500/', { dummy: 'data' })
+        .then(res => {
+          expect(res.status).toBe(200);
+          expect(res.data.hello).toBe('world');
+          res.config.clearCurl();
+          expect(res.config.curlObject).not.toBeDefined()
+          expect(res.config.curlCommand).not.toBeDefined()
+          expect(res.config.clearCurl).not.toBeDefined()
+          done();
+        })
+        .catch(err => {
+          console.error(err);
+        });
   });
 
   it('should return a generated command with XML as data', done => {

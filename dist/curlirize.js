@@ -24,8 +24,14 @@ exports.default = function (instance) {
       var curl = new _CurlHelper.CurlHelper(req);
       req.curlObject = curl;
       req.curlCommand = curl.generateCommand();
+      req.clearCurl = function () {
+        delete req.curlObject;
+        delete req.curlCommand;
+        delete req.clearCurl;
+      };
     } catch (err) {
       // Even if the axios middleware is stopped, no error should occur outside.
+      console.log(err);
       callback(null, err);
     } finally {
       if (req.curlirize !== false) {

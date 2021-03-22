@@ -50,9 +50,7 @@ var CurlHelper = exports.CurlHelper = function () {
   }, {
     key: "getBody",
     value: function getBody() {
-      if (typeof this.request.data !== "undefined" && this.request.data !== "" && this.request.data !== null &&
-      //Object.keys(this.request.data).length &&
-      this.request.method.toUpperCase() !== "GET") {
+      if (typeof this.request.data !== "undefined" && this.request.data !== "" && this.request.data !== null && this.request.method.toUpperCase() !== "GET") {
         var data = _typeof(this.request.data) === "object" || Object.prototype.toString.call(this.request.data) === "[object Array]" ? JSON.stringify(this.request.data) : this.request.data;
         return ("--data '" + data + "'").trim();
       } else {
