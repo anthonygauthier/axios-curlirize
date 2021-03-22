@@ -1,3 +1,3 @@
-const { default: CommonJS } = require('./dist/curlirize');
+const { default: CommonJS } = require("./dist/curlirize");
 module.exports =
-  typeof process === 'object' ? CommonJS : require('./src/curlirize');
+  typeof process === "object" ? CommonJS : require("./src/curlirize");

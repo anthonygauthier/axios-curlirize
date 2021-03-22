@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _CurlHelper = require('./lib/CurlHelper');
+var _CurlHelper = require("./lib/CurlHelper");
 
 function defaultLogCallback(curlResult, err) {
   var command = curlResult.command;
@@ -31,7 +31,6 @@ exports.default = function (instance) {
       };
     } catch (err) {
       // Even if the axios middleware is stopped, no error should occur outside.
-      console.log(err);
       callback(null, err);
     } finally {
       if (req.curlirize !== false) {

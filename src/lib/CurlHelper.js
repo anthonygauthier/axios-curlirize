@@ -13,7 +13,7 @@ export class CurlHelper {
     }
 
     // add any custom headers (defined upon calling methods like .get(), .post(), etc.)
-    for (let property in this.request.headers) {
+    for(let property in this.request.headers) {
       if (
         !["common", "delete", "get", "head", "patch", "post", "put"].includes(
           property
@@ -23,7 +23,7 @@ export class CurlHelper {
       }
     }
 
-    for (let property in headers) {
+    for(let property in headers) {
       let header = `${property}:${headers[property]}`;
       curlHeaders = `${curlHeaders} -H "${header}"`;
     }
@@ -64,9 +64,9 @@ export class CurlHelper {
     let params = "",
       i = 0;
 
-    for (let param in this.request.params) {
+    for(let param in this.request.params) {
       params +=
-        i != 0
+        i !== 0
           ? `&${param}=${this.request.params[param]}`
           : `?${param}=${this.request.params[param]}`;
       i++;
@@ -78,8 +78,8 @@ export class CurlHelper {
   getBuiltURL() {
     let url = this.getUrl();
 
-    if (this.getQueryString() != "") {
-      url = url.charAt(url.length - 1) == "/" ? url.substr(0, url.length - 1) : url;
+    if (this.getQueryString() !== "") {
+      url = url.charAt(url.length - 1) === "/" ? url.substr(0, url.length - 1) : url;
       url += this.getQueryString();
     }
 

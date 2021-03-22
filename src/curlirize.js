@@ -1,4 +1,4 @@
-import { CurlHelper } from './lib/CurlHelper';
+import { CurlHelper } from "./lib/CurlHelper";
 
 function defaultLogCallback(curlResult, err) {
   const { command } = curlResult;
@@ -19,7 +19,7 @@ export default (instance, callback = defaultLogCallback) => {
         delete req.curlObject;
         delete req.curlCommand;
         delete req.clearCurl;
-      }
+      };
     } catch (err) {
       // Even if the axios middleware is stopped, no error should occur outside.
       callback(null, err);
