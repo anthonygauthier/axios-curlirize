@@ -14,4 +14,4 @@ app.listen(7500, () => {
   console.info("Express dev server listening on port 7500");
 });
 
-module.exports.app;
+export default app;

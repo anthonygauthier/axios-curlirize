@@ -1,9 +1,9 @@
 import expect from "expect";
 import axios from "axios";
-import curlirize from "../curlirize";
-import { CurlHelper } from "../lib/CurlHelper";
+import curlirize from "../src/main.js";
+import { CurlHelper } from "../src/lib/CurlHelper.js";
 
-import { app } from "./devapp";
+import app from "./devapp.js";
 
 curlirize(axios);
 
