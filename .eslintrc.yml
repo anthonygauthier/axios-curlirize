@@ -10,4 +10,5 @@ rules: {
   no-prototype-builtins: 'off',
   no-console: 'off',
   no-undefined: 'off',
+  no-undef: 'off',
 }
