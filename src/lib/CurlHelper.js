@@ -24,8 +24,10 @@ export class CurlHelper {
     }
 
     for(let property in headers) {
-      let header = `${property}:${headers[property]}`;
-      curlHeaders = `${curlHeaders} -H "${header}"`;
+      if({}.hasOwnProperty.call(headers, property)) {
+        let header = `${property}:${headers[property]}`;
+        curlHeaders = `${curlHeaders} -H "${header}"`;
+      }
     }
 
     return curlHeaders.trim();
@@ -65,11 +67,13 @@ export class CurlHelper {
       i = 0;
 
     for(let param in this.request.params) {
-      params +=
+      if({}.hasOwnProperty.call(this.request.params, param)) {
+        params +=
         i !== 0
           ? `&${param}=${this.request.params[param]}`
           : `?${param}=${this.request.params[param]}`;
-      i++;
+        i++;
+      }
     }
 
     return params;

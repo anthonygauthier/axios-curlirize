@@ -1,4 +1,4 @@
-import { CurlHelper } from "./lib/CurlHelper";
+import { CurlHelper } from "./lib/CurlHelper.js";
 
 function defaultLogCallback(curlResult, err) {
   const { command } = curlResult;
