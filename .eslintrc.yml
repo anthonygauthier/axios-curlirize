@@ -7,5 +7,6 @@ parserOptions:
   sourceType: module
 rules: {
   no-prototype-builtins: 'off',
-  no-console: 'off'
+  no-console: 'off',
+  no-undefined: 'off',
 }
