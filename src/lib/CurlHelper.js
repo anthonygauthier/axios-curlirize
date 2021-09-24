@@ -63,8 +63,11 @@ export class CurlHelper {
   }
 
   getQueryString() {
-    let params = "",
-      i = 0;
+    if (this.request.paramsSerializer) {
+      return this.request.paramsSerializer(this.request.params)
+    }
+    let params = ""
+    let i = 0
 
     for(let param in this.request.params) {
       if({}.hasOwnProperty.call(this.request.params, param)) {

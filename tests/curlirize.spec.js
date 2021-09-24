@@ -94,6 +94,36 @@ describe("Testing curlirize", () => {
         console.error(err);
       });
   });
+
+  it("should return the generated command with a queryString specified in the URL with paramsSerializer", (done) => {
+    const api = axios.create({
+      paramsSerializer: (params) => {
+        let p = ""
+        let i = 0
+
+        for(let param in params) {
+          if({}.hasOwnProperty.call(params, param)) {
+            p +=
+              i !== 0
+                ? `&${param}=${params[param]}`
+                : `?${param}=${params[param]}`;
+            i++;
+          }
+        }
+        return p
+      }
+    })
+    curlirize(api)
+    api.post("http://localhost:7500/", null, {params: {test: 1, text: 'sim'}})
+      .then((res) => {
+        expect(res.config.curlCommand).toBeDefined();
+        expect(res.config.curlCommand).toBe("curl -X POST -H \"Content-Type:application/x-www-form-urlencoded\" \"http://localhost:7500?test=1&text=sim\"");
+        done();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
 });
 
 describe("Testing curl-helper module", () => {
@@ -110,7 +140,7 @@ describe("Testing curl-helper module", () => {
     method: "post",
     url: "http://localhost:7500/",
     data: { dummy: "data" },
-    params: { testParam: "test1", testParamTwo: "test2"} 
+    params: { testParam: "test1", testParamTwo: "test2"}
   };
   const curl = new CurlHelper(fakeConfig);
 
