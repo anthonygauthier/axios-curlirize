@@ -96,7 +96,7 @@ export class CurlHelper {
   }
 
   generateCommand() {
-    return `curl ${this.getMethod()} ${this.getHeaders()} ${this.getBody()} "${this.getBuiltURL()}"`
+    return `curl ${this.getMethod()} "${this.getBuiltURL()}" ${this.getHeaders()} ${this.getBody()}`
       .trim()
       .replace(/\s{2,}/g, " ");
   }
