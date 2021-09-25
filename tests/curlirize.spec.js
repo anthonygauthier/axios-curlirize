@@ -2,7 +2,7 @@ import expect from "expect";
 import axios from "axios";
 import curlirize from "../src/main.js";
 import { CurlHelper } from "../src/lib/CurlHelper.js";
-
+import qs from 'qs'
 import app from "./devapp.js";
 
 curlirize(axios);
@@ -98,19 +98,7 @@ describe("Testing curlirize", () => {
   it("should return the generated command with a queryString specified in the URL with paramsSerializer", (done) => {
     const api = axios.create({
       paramsSerializer: (params) => {
-        let p = ""
-        let i = 0
-
-        for(let param in params) {
-          if({}.hasOwnProperty.call(params, param)) {
-            p +=
-              i !== 0
-                ? `&${param}=${params[param]}`
-                : `?${param}=${params[param]}`;
-            i++;
-          }
-        }
-        return p
+        return qs.stringify(params)
       }
     })
     curlirize(api)
@@ -121,6 +109,19 @@ describe("Testing curlirize", () => {
         done();
       })
       .catch((err) => {
+        console.error(err);
+      });
+  });
+
+  it("do not add ? if params is empty", (done) => {
+    axios.post("http://localhost:7500/", null)
+      .then((res) => {
+        expect(res.config.curlCommand).toBeDefined();
+        expect(res.config.curlCommand).toBe('curl -X POST -H "Content-Type:application/x-www-form-urlencoded" "http://localhost:7500/"');
+        done();
+      })
+      .catch((err) => {
+        console.log('--', err)
         console.error(err);
       });
   });
