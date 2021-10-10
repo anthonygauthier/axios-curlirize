@@ -141,6 +141,22 @@ describe("Testing curlirize", () => {
         console.error(err);
       });
   });
+
+  it("cut middle slash", (done) => {
+    const api = axios.create({
+      baseURL: 'http://localhost:7500/',
+    })
+    curlirize(api)
+    api.post("/api/", null, {params: {test: 1, text: 'sim'}})
+      .then((res) => {
+        expect(res.config.curlCommand).toBeDefined();
+        expect(res.config.curlCommand).toBe('curl -X POST "http://localhost:7500/api/?test=1&text=sim" -H "Content-Type:application/x-www-form-urlencoded"');
+        done();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
 });
 
 describe("Testing curl-helper module", () => {

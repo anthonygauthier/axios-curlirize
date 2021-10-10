@@ -57,7 +57,13 @@ export class CurlHelper {
 
   getUrl() {
     if (this.request.baseURL) {
-      return this.request.baseURL + "/" + this.request.url;
+      let baseUrl = this.request.baseURL
+      let url = this.request.url
+      let finalUrl = baseUrl + "/" + url
+      return finalUrl
+        .replace(/\/{2,}/g, '/')
+        .replace("http:/", "http://")
+        .replace("https:/", "https://")
     }
     return this.request.url;
   }
