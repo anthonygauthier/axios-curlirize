@@ -2,7 +2,7 @@ import expect from "expect";
 import axios from "axios";
 import curlirize from "../src/main.js";
 import { CurlHelper } from "../src/lib/CurlHelper.js";
-
+import qs from 'qs'
 import app from "./devapp.js";
 
 curlirize(axios);
@@ -51,7 +51,7 @@ describe("Testing curlirize", () => {
     axios.post("http://localhost:7500/", { dummy: "data" })
       .then((res) => {
         expect(res.config.curlCommand).toBeDefined();
-        expect(res.config.curlCommand).toBe(`curl -X POST -H "Content-Type:application/x-www-form-urlencoded" --data '{"dummy":"data"}' "http://localhost:7500/"`);
+        expect(res.config.curlCommand).toBe(`curl -X POST "http://localhost:7500/" -H "Content-Type:application/x-www-form-urlencoded" --data '{"dummy":"data"}'`);
         done();
       })
       .catch((err) => {
@@ -63,7 +63,7 @@ describe("Testing curlirize", () => {
     axios.post("http://localhost:7500/")
       .then((res) => {
         expect(res.config.curlCommand).toBeDefined();
-        expect(res.config.curlCommand).toBe(`curl -X POST -H "Content-Type:application/x-www-form-urlencoded" "http://localhost:7500/"`);
+        expect(res.config.curlCommand).toBe(`curl -X POST "http://localhost:7500/" -H "Content-Type:application/x-www-form-urlencoded"`);
         done();
       })
       .catch((err) => {
@@ -75,7 +75,7 @@ describe("Testing curlirize", () => {
     axios.post("http://localhost:7500/", null, {headers: {Authorization: "Bearer 123", testHeader: "Testing"}})
       .then((res) => {
         expect(res.config.curlCommand).toBeDefined();
-        expect(res.config.curlCommand).toBe("curl -X POST -H \"Content-Type:application/x-www-form-urlencoded\" -H \"Authorization:Bearer 123\" -H \"testHeader:Testing\" \"http://localhost:7500/\"");
+        expect(res.config.curlCommand).toBe('curl -X POST "http://localhost:7500/" -H "Content-Type:application/x-www-form-urlencoded" -H "Authorization:Bearer 123" -H "testHeader:Testing"');
         done();
       })
       .catch((err) => {
@@ -87,7 +87,70 @@ describe("Testing curlirize", () => {
     axios.post("http://localhost:7500/", null, {params: {test: 1}})
       .then((res) => {
         expect(res.config.curlCommand).toBeDefined();
-        expect(res.config.curlCommand).toBe("curl -X POST -H \"Content-Type:application/x-www-form-urlencoded\" \"http://localhost:7500?test=1\"");
+        expect(res.config.curlCommand).toBe('curl -X POST "http://localhost:7500/?test=1" -H "Content-Type:application/x-www-form-urlencoded"');
+        done();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+
+  it("should return the generated command with a queryString specified in the URL with paramsSerializer", (done) => {
+    const api = axios.create({
+      paramsSerializer: (params) => {
+        return qs.stringify(params)
+      }
+    })
+    curlirize(api)
+    api.post("http://localhost:7500/", null, {params: {test: 1, text: 'sim'}})
+      .then((res) => {
+        expect(res.config.curlCommand).toBeDefined();
+        expect(res.config.curlCommand).toBe('curl -X POST "http://localhost:7500/?test=1&text=sim" -H "Content-Type:application/x-www-form-urlencoded"');
+        done();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+
+  it("do not add ? if params is empty", (done) => {
+    axios.post("http://localhost:7500/", null)
+      .then((res) => {
+        expect(res.config.curlCommand).toBeDefined();
+        expect(res.config.curlCommand).toBe('curl -X POST "http://localhost:7500/" -H "Content-Type:application/x-www-form-urlencoded"');
+        done();
+      })
+      .catch((err) => {
+        console.log('--', err)
+        console.error(err);
+      });
+  });
+
+  it("do not cut end slash", (done) => {
+    const api = axios.create({
+      baseURL: 'http://localhost:7500',
+    })
+    curlirize(api)
+    api.post("api/", null, {params: {test: 1, text: 'sim'}})
+      .then((res) => {
+        expect(res.config.curlCommand).toBeDefined();
+        expect(res.config.curlCommand).toBe('curl -X POST "http://localhost:7500/api/?test=1&text=sim" -H "Content-Type:application/x-www-form-urlencoded"');
+        done();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+
+  it("cut middle slash", (done) => {
+    const api = axios.create({
+      baseURL: 'http://localhost:7500/',
+    })
+    curlirize(api)
+    api.post("/api/", null, {params: {test: 1, text: 'sim'}})
+      .then((res) => {
+        expect(res.config.curlCommand).toBeDefined();
+        expect(res.config.curlCommand).toBe('curl -X POST "http://localhost:7500/api/?test=1&text=sim" -H "Content-Type:application/x-www-form-urlencoded"');
         done();
       })
       .catch((err) => {
@@ -110,7 +173,7 @@ describe("Testing curl-helper module", () => {
     method: "post",
     url: "http://localhost:7500/",
     data: { dummy: "data" },
-    params: { testParam: "test1", testParamTwo: "test2"} 
+    params: { testParam: "test1", testParamTwo: "test2"}
   };
   const curl = new CurlHelper(fakeConfig);
 

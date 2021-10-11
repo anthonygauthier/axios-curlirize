@@ -57,14 +57,26 @@ export class CurlHelper {
 
   getUrl() {
     if (this.request.baseURL) {
-      return this.request.baseURL + "/" + this.request.url;
+      let baseUrl = this.request.baseURL
+      let url = this.request.url
+      let finalUrl = baseUrl + "/" + url
+      return finalUrl
+        .replace(/\/{2,}/g, '/')
+        .replace("http:/", "http://")
+        .replace("https:/", "https://")
     }
     return this.request.url;
   }
 
   getQueryString() {
-    let params = "",
-      i = 0;
+    if (this.request.paramsSerializer) {
+      const params = this.request.paramsSerializer(this.request.params)
+      if (!params || params.length === 0) return ''
+      if (params.startsWith('?')) return params
+      return `?${params}`
+    }
+    let params = ""
+    let i = 0
 
     for(let param in this.request.params) {
       if({}.hasOwnProperty.call(this.request.params, param)) {
@@ -83,7 +95,6 @@ export class CurlHelper {
     let url = this.getUrl();
 
     if (this.getQueryString() !== "") {
-      url = url.charAt(url.length - 1) === "/" ? url.substr(0, url.length - 1) : url;
       url += this.getQueryString();
     }
 
@@ -91,7 +102,7 @@ export class CurlHelper {
   }
 
   generateCommand() {
-    return `curl ${this.getMethod()} ${this.getHeaders()} ${this.getBody()} "${this.getBuiltURL()}"`
+    return `curl ${this.getMethod()} "${this.getBuiltURL()}" ${this.getHeaders()} ${this.getBody()}`
       .trim()
       .replace(/\s{2,}/g, " ");
   }
