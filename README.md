@@ -14,22 +14,6 @@ This module is an axios third-party module to log any axios request as a curl co
 
 The module makes use of axios' interceptors to log the request as a cURL command. It also stores it in the response's config object. Therefore, the command can be seen in the app's console, as well as in the `res.config.curlCommand` property of the response.
 
-# Changing the logger
-
-By default, axios-curlirize uses the `console.log/error()` functions. It is possible to change the logger by doing something similar to this:
-
-```javascript
-// when initiating your curlirize instance
-curlirize(axios, (result, err) => {
-  const { command } = result;
-  if (err) {
-    // use your logger here
-  } else {
-    // use your logger here
-  }
-});
-```
-
 # How to use it
 
 axios-curlirize is super easy to use. First you'll have to install it.
@@ -73,6 +57,23 @@ app.listen(7500, () => {
 });
 ```
 
+# Features
+
+## Changing the logger
+By default, axios-curlirize uses the `console.log/error()` functions. It is possible to change the logger by doing something similar to this:
+
+```javascript
+// when initiating your curlirize instance
+curlirize(axios, (result, err) => {
+  const { command } = result;
+  if (err) {
+    // use your logger here
+  } else {
+    // use your logger here
+  }
+});
+```
+
 ## Curilirize additional axios instance
 To curlirize any other instances of axios (aside from the base one), please call the `curlirize()` method on that instance.
 ```javascript
@@ -80,7 +81,7 @@ const instance = axios.create({ baseURL: 'https://some-domain.com/api/', timeout
 curlirize(instance);
 ```
 
-# Disable the logger
+## Disable the logger
 
 By default, all requests will be logged. But you can disable this behaviour unitarily by setting the `curlirize` option to false within the axios request.
 
@@ -97,7 +98,7 @@ axios
   });
 ```
 
-# Clear a request
+## Clear a request
 
 ```javascript
 axios
