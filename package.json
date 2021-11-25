@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "Axios third-party module to print all axios requests as curl commands in the console. This repository is forked from axios-curlirize <https://www.npmjs.com/package/axios-curlirize> and supports use with Node JS without having to enable ES6 imports. This repo was inspired by an issue <https://github.com/delirius325/axios-curlirize/issues/20> raised on the origional repository <https://github.com/delirius325/axios-curlirize>. Special thanks to Anthony Gauthier <https://github.com/delirius325>, the author of axios-curlirize",
   "main": "src/main.js",
+  "types": "src/main.d.ts",
   "type": "module",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --recursive --exit tests/**/*.spec.js*"
