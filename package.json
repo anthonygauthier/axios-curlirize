@@ -39,7 +39,7 @@
   "dependencies": {
   },
   "devDependencies": {
-    "axios": ">=0.21.1",
+    "axios": ">=0.21.2",
     "eslint": "^7.29.0",
     "expect": "^27.0.6",
     "express": "^4.17.1",
