@@ -26,7 +26,7 @@ export class CurlHelper {
     for(let property in headers) {
       if({}.hasOwnProperty.call(headers, property)) {
         let header = `${property}:${headers[property]}`;
-        curlHeaders = `${curlHeaders} -H "${header}"`;
+        curlHeaders = `${curlHeaders} -H '${header}'`;
       }
     }
 
